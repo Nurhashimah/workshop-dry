@@ -2,17 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -49,7 +44,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: articles; Type: TABLE; Schema: public; Owner: -
+-- Name: articles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE articles (
@@ -83,7 +78,7 @@ ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
 
 
 --
--- Name: authors; Type: TABLE; Schema: public; Owner: -
+-- Name: authors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE authors (
@@ -114,7 +109,7 @@ ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -123,21 +118,21 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: articles id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
 
 
 --
--- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
 
 
 --
--- Name: articles articles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: articles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY articles
@@ -145,7 +140,7 @@ ALTER TABLE ONLY articles
 
 
 --
--- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY authors
@@ -153,7 +148,7 @@ ALTER TABLE ONLY authors
 
 
 --
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -161,28 +156,28 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: articles_status_index; Type: INDEX; Schema: public; Owner: -
+-- Name: articles_status_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX articles_status_index ON articles USING btree (status);
 
 
 --
--- Name: authors touch_updated_at; Type: TRIGGER; Schema: public; Owner: -
+-- Name: touch_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER touch_updated_at BEFORE UPDATE ON authors FOR EACH ROW EXECUTE PROCEDURE touch_updated_at();
 
 
 --
--- Name: articles touch_updated_at; Type: TRIGGER; Schema: public; Owner: -
+-- Name: touch_updated_at; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER touch_updated_at BEFORE UPDATE ON articles FOR EACH ROW EXECUTE PROCEDURE touch_updated_at();
 
 
 --
--- Name: articles articles_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: articles_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY articles
