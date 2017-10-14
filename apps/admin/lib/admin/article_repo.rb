@@ -3,18 +3,24 @@ require "admin/entities"
 
 module Admin
   class ArticleRepo < Blog::Repository[:articles]
-  	relations :authors
-  	
-  	commands :create
+    relations :authors
 
-  	struct_namespace Admin::Entities
+    commands :create, update: :by_pk
 
-  	def by_pk(id)
-  		articles.by_pk(id).one
-  	end
+    struct_namespace Entities
 
-  	def listing
-  		articles.combine(:author).order_by_created_at
-  	end
+    def by_pk(id)
+      articles.by_pk(id).one!
+    end
+
+    def listing
+      articles.ordered_by_created_at
+    end
+
+    private
+
+    def articles
+      aggregate(:author)
+    end
   end
 end
